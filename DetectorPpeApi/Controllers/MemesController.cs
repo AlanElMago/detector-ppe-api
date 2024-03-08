@@ -1,4 +1,5 @@
-﻿using DetectorPpeApi.Services;
+﻿using DetectorPpeApi.Authentication;
+using DetectorPpeApi.Services;
 using Microsoft.AspNetCore.Mvc;
 
 namespace DetectorPpeApi.Controllers;
@@ -17,6 +18,7 @@ public class MemesController(IWhatsAppService whatsAppService) : ControllerBase
     ];
 
     [HttpPost("SendToWhatsApp/{recipientPhoneNumber}")]
+    [ServiceFilter(typeof(ApiKeyAuthFilter))]
     public async Task<IActionResult> SendToWhatsApp(string recipientPhoneNumber)
     {
         if (string.IsNullOrEmpty(recipientPhoneNumber))
