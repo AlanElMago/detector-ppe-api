@@ -1,0 +1,6 @@
+@DetectorPpeApi_HostAddress = http://localhost:5251
+
+GET {{DetectorPpeApi_HostAddress}}/weatherforecast/
+Accept: application/json
+
+###
