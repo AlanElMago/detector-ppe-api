@@ -1,3 +1,4 @@
+using DetectorPpeApi.Authentication;
 using DetectorPpeApi.Services;
 using Microsoft.AspNetCore.Mvc;
 using System.Text.Json.Nodes;
@@ -31,6 +32,7 @@ public class WeatherForecastController(
     }
 
     [HttpPost("SendToWhatsApp/{recipientPhoneNumber}")]
+    [ServiceFilter(typeof(ApiKeyAuthFilter))]
     public async Task<IActionResult> SendWeatherForcastToWhatsApp([FromRoute] string recipientPhoneNumber)
     {
         if (string.IsNullOrEmpty(recipientPhoneNumber))
