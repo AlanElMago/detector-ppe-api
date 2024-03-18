@@ -5,7 +5,9 @@
       "launchBrowser": true,
       "launchUrl": "swagger",
       "environmentVariables": {
-        "ASPNETCORE_ENVIRONMENT": "Development"
+        "ASPNETCORE_ENVIRONMENT": "Development",
+        "VaultUri": "https://detectorppeapivault.vault.azure.net/",
+        "AZURE_USERNAME": "QogOVxpVGbdDLSuXcxaB@outlook.com"
       },
       "dotnetRunMessages": true,
       "applicationUrl": "http://localhost:5251"
@@ -15,7 +17,9 @@
       "launchBrowser": true,
       "launchUrl": "swagger",
       "environmentVariables": {
-        "ASPNETCORE_ENVIRONMENT": "Development"
+        "ASPNETCORE_ENVIRONMENT": "Development",
+        "VaultUri": "https://detectorppeapivault.vault.azure.net/",
+        "AZURE_USERNAME": "QogOVxpVGbdDLSuXcxaB@outlook.com"
       },
       "dotnetRunMessages": true,
       "applicationUrl": "https://localhost:7194;http://localhost:5251"
@@ -25,7 +29,9 @@
       "launchBrowser": true,
       "launchUrl": "swagger",
       "environmentVariables": {
-        "ASPNETCORE_ENVIRONMENT": "Development"
+        "ASPNETCORE_ENVIRONMENT": "Development",
+        "VaultUri": "https://detectorppeapivault.vault.azure.net/",
+        "AZURE_USERNAME": "QogOVxpVGbdDLSuXcxaB@outlook.com"
       }
     },
     "Container (Dockerfile)": {
@@ -34,7 +40,11 @@
       "launchUrl": "{Scheme}://{ServiceHost}:{ServicePort}/swagger",
       "environmentVariables": {
         "ASPNETCORE_HTTPS_PORTS": "8081",
-        "ASPNETCORE_HTTP_PORTS": "8080"
+        "ASPNETCORE_HTTP_PORTS": "8080",
+        "VaultUri": "https://detectorppeapivault.vault.azure.net/",
+        "AZURE_USERNAME": "QogOVxpVGbdDLSuXcxaB@outlook.com",
+        "AZURE_CLIENT_ID": "89af3e5a-a556-4493-9dd5-f310d71d6c0c",
+        "AZURE_TENANT_ID": "72f2b7b1-314e-4461-b854-09c67851c6e6"
       },
       "publishAllPorts": true,
       "useSSL": true

@@ -2,8 +2,20 @@ using DetectorPpeApi.Authentication;
 using DetectorPpeApi.Models;
 using DetectorPpeApi.Services;
 using Microsoft.OpenApi.Models;
+using Azure.Identity;
 
 var builder = WebApplication.CreateBuilder(args);
+
+string? vaultUri = Environment.GetEnvironmentVariable("VaultUri");
+
+if (string.IsNullOrEmpty(vaultUri))
+{
+    throw new InvalidOperationException("Vault URI not found.");
+}
+
+Uri keyVaultEndpoint = new(vaultUri);
+DefaultAzureCredential azureCredential = new();
+builder.Configuration.AddAzureKeyVault(keyVaultEndpoint, azureCredential);
 
 // Load configuration.
 builder.Services.Configure<WhatsAppApiSettings>(builder.Configuration.GetSection("WhatsAppApi"));
