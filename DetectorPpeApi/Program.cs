@@ -6,9 +6,7 @@ using Azure.Identity;
 
 var builder = WebApplication.CreateBuilder(args);
 
-// TODO: Fix the issue with the Key Vault connected service.
-// string? vaultUri = Environment.GetEnvironmentVariable("VaultUri");
-string? vaultUri = builder.Configuration["VaultUri"];
+string? vaultUri = Environment.GetEnvironmentVariable("VaultUri");
 
 if (string.IsNullOrEmpty(vaultUri))
 {
