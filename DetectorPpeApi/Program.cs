@@ -6,7 +6,9 @@ using Azure.Identity;
 
 var builder = WebApplication.CreateBuilder(args);
 
-string? vaultUri = Environment.GetEnvironmentVariable("VaultUri");
+// TODO: Fix the issue with the Key Vault connected service.
+// string? vaultUri = Environment.GetEnvironmentVariable("VaultUri");
+string? vaultUri = builder.Configuration["VaultUri"];
 
 if (string.IsNullOrEmpty(vaultUri))
 {
@@ -56,10 +58,11 @@ builder.Services.AddSwaggerGen(opt =>
 
 var app = builder.Build();
 
+app.UseSwagger();
+
 // Configure the HTTP request pipeline.
 if (app.Environment.IsDevelopment())
 {
-    app.UseSwagger();
     app.UseSwaggerUI();
 }
 
