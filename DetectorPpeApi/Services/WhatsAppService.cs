@@ -12,6 +12,7 @@ public interface IWhatsAppService
 {
     Task<string> SendMessageAsync(string msg, string recipientPhoneNumber);
     Task<string> UploadMediaAsync(string filePath);
+    Task<string> UploadMediaAsync(IFormFile img);
     Task<string> SendMediaMessageAsync(string mediaId, string recipientPhoneNumber);
 }
 
@@ -60,6 +61,33 @@ public class WhatsAppService : IWhatsAppService
         {
             { fileStreamContent, "file", "sample.jpg" },
             { new StringContent(MediaTypeNames.Image.Jpeg), "type" },
+            { new StringContent("whatsapp"), "messaging_product" }
+        };
+
+        HttpResponseMessage res = await _httpClient.SendAsync(httpRequestMessage);
+        string resContent = await res.Content.ReadAsStringAsync();
+
+        return JsonSerializer.Deserialize<UploadMediaResponse>(resContent)?.Id ?? string.Empty;
+    }
+
+    public async Task<string> UploadMediaAsync(IFormFile img)
+    {
+        string imageMediaType = img.ContentType switch
+        {
+            "image/jpeg" => MediaTypeNames.Image.Jpeg,
+            "image/png" => MediaTypeNames.Image.Png,
+            _ => throw new InvalidOperationException("Only jpg and png files are allowed.")
+        };
+
+        StreamContent fileStreamContent = new(img.OpenReadStream());
+        fileStreamContent.Headers.ContentType = new MediaTypeHeaderValue(MediaTypeNames.Image.Jpeg);
+
+        HttpRequestMessage httpRequestMessage = new(HttpMethod.Post, $"{RequestUri}/{PhoneNumberId}/media");
+        httpRequestMessage.Headers.Accept.Add(new MediaTypeWithQualityHeaderValue(MediaTypeNames.Multipart.FormData));
+        httpRequestMessage.Content = new MultipartFormDataContent
+        {
+            { fileStreamContent, "file", img.FileName },
+            { new StringContent(imageMediaType), "type" },
             { new StringContent("whatsapp"), "messaging_product" }
         };
 
