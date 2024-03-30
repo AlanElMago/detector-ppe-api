@@ -9,9 +9,9 @@
   </PropertyGroup>
 
   <ItemGroup>
-    <Content Remove="wwwroot\Assets\Memes\noice.jpg" />
-    <Content Remove="wwwroot\Assets\Memes\smiling-old-man.jpg" />
-    <Content Remove="wwwroot\Assets\Memes\the-rock-raised-eyebrow.jpg" />
+    <Content Remove="Assets\Memes\noice.jpg" />
+    <Content Remove="Assets\Memes\smiling-old-man.jpg" />
+    <Content Remove="Assets\Memes\the-rock-raised-eyebrow.jpg" />
   </ItemGroup>
 
   <ItemGroup>
@@ -22,9 +22,9 @@
   </ItemGroup>
 
   <ItemGroup>
-    <None Include="wwwroot\Assets\Memes\noice.jpg" />
-    <None Include="wwwroot\Assets\Memes\smiling-old-man.jpg" />
-    <None Include="wwwroot\Assets\Memes\the-rock-raised-eyebrow.jpg" />
+    <None Include="Assets\Memes\noice.jpg" />
+    <None Include="Assets\Memes\smiling-old-man.jpg" />
+    <None Include="Assets\Memes\the-rock-raised-eyebrow.jpg" />
   </ItemGroup>
 
 </Project>
