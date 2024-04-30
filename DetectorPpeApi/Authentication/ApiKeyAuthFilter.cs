@@ -15,6 +15,7 @@ public class ApiKeyAuthFilter(IConfiguration config) : IAsyncAuthorizationFilter
             out StringValues extractedApiKey))
         {
             context.Result = new UnauthorizedObjectResult("API Key is missing");
+
             return Task.CompletedTask;
         }
 
@@ -23,7 +24,6 @@ public class ApiKeyAuthFilter(IConfiguration config) : IAsyncAuthorizationFilter
         if (apiKey != extractedApiKey)
         {
             context.Result = new UnauthorizedObjectResult("API Key is invalid");
-            return Task.CompletedTask;
         }
 
         return Task.CompletedTask;
