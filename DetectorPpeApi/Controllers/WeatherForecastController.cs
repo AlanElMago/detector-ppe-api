@@ -1,3 +1,4 @@
+using DetectorPpeApi.Authentication;
 using Microsoft.AspNetCore.Mvc;
 
 namespace DetectorPpeApi.Controllers;
@@ -12,6 +13,7 @@ public class WeatherForecastController : ControllerBase
     ];
 
     [HttpGet]
+    [ServiceFilter(typeof(ApiKeyAuthFilter))]
     public IEnumerable<WeatherForecast> Get()
     {
         return Enumerable.Range(1, 5).Select(index => new WeatherForecast
