@@ -9,22 +9,10 @@
   </PropertyGroup>
 
   <ItemGroup>
-    <Content Remove="Assets\Memes\noice.jpg" />
-    <Content Remove="Assets\Memes\smiling-old-man.jpg" />
-    <Content Remove="Assets\Memes\the-rock-raised-eyebrow.jpg" />
-  </ItemGroup>
-
-  <ItemGroup>
     <PackageReference Include="Azure.Extensions.AspNetCore.Configuration.Secrets" Version="1.3.1" />
     <PackageReference Include="Azure.Identity" Version="1.10.4" />
     <PackageReference Include="Microsoft.VisualStudio.Azure.Containers.Tools.Targets" Version="1.19.6" />
     <PackageReference Include="Swashbuckle.AspNetCore" Version="6.5.0" />
-  </ItemGroup>
-
-  <ItemGroup>
-    <None Include="Assets\Memes\noice.jpg" />
-    <None Include="Assets\Memes\smiling-old-man.jpg" />
-    <None Include="Assets\Memes\the-rock-raised-eyebrow.jpg" />
   </ItemGroup>
 
 </Project>
