@@ -31,7 +31,7 @@ public class WhatsAppController(IWhatsAppService whatsAppService) : ControllerBa
 
     [HttpPost("SendMediaMessage/{recipientPhoneNumber}")]
     [ServiceFilter(typeof(ApiKeyAuthFilter))]
-    public async Task<IActionResult> SendMediaMessage(string recipientPhoneNumber, IFormFile img)
+    public async Task<IActionResult> SendMediaMessage(string recipientPhoneNumber, [FromForm] IFormFile img)
     {
         if (string.IsNullOrEmpty(recipientPhoneNumber))
         {
