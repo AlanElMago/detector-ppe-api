@@ -4,12 +4,21 @@ using Microsoft.AspNetCore.Mvc;
 
 namespace DetectorPpeApi.Controllers;
 
+/// <summary>
+/// WhatsAppController is a controller that allows sending messages and media messages via WhatsApp.
+/// </summary>
+/// <param name="whatsAppService">IWhatsAppService instance to access the WhatsApp service methods.</param>
 [ApiController]
 [Route("api/[controller]")]
 public class WhatsAppController(IWhatsAppService whatsAppService) : ControllerBase
 {
     private readonly IWhatsAppService _whatsAppService = whatsAppService;
 
+    /// <summary>
+    /// SendMessage is a method that sends a message to a recipient via WhatsApp.
+    /// </summary>
+    /// <param name="recipientPhoneNumber">The phone number of the recipient.</param>
+    /// <param name="msg">The message to be sent.</param>
     [HttpPost("SendMessage/{recipientPhoneNumber}")]
     [ServiceFilter(typeof(ApiKeyAuthFilter))]
     public async Task<IActionResult> SendMessage(string recipientPhoneNumber, [FromBody] string msg)
@@ -29,6 +38,11 @@ public class WhatsAppController(IWhatsAppService whatsAppService) : ControllerBa
         return Ok(res);
     }
 
+    /// <summary>
+    /// SendMediaMessage is a method that sends a media message to a recipient via WhatsApp.
+    /// </summary>
+    /// <param name="recipientPhoneNumber">The phone number of the recipient.</param>
+    /// <param name="img">The image to be sent.</param>
     [HttpPost("SendMediaMessage/{recipientPhoneNumber}")]
     [ServiceFilter(typeof(ApiKeyAuthFilter))]
     public async Task<IActionResult> SendMediaMessage(string recipientPhoneNumber, [FromForm] IFormFile img)

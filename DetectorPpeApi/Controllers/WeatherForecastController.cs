@@ -3,6 +3,9 @@ using Microsoft.AspNetCore.Mvc;
 
 namespace DetectorPpeApi.Controllers;
 
+/// <summary>
+/// WeatherForecastController is a controller that helps to test if the API and the API key authentication are working.
+/// </summary>
 [ApiController]
 [Route("api/[controller]")]
 public class WeatherForecastController : ControllerBase
@@ -12,6 +15,10 @@ public class WeatherForecastController : ControllerBase
         "Freezing", "Bracing", "Chilly", "Cool", "Mild", "Warm", "Balmy", "Hot", "Sweltering", "Scorching"
     ];
 
+    /// <summary>
+    /// Get is a method that returns a list of weather forecasts.
+    /// Used to test if the API and the API key authentication are working.
+    /// </summary>
     [HttpGet]
     [ServiceFilter(typeof(ApiKeyAuthFilter))]
     public IEnumerable<WeatherForecast> Get()
