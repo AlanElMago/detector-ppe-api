@@ -2,20 +2,33 @@ using DetectorPpeApi.Authentication;
 using DetectorPpeApi.Models;
 using DetectorPpeApi.Services;
 using Microsoft.OpenApi.Models;
+using Azure.Identity;
 
 var builder = WebApplication.CreateBuilder(args);
 
-// Load configuration.
+// Configure Azure Key Vault
+string? vaultUri = Environment.GetEnvironmentVariable("VaultUri");
+
+if (string.IsNullOrEmpty(vaultUri))
+{
+    throw new InvalidOperationException("Vault URI not found.");
+}
+
+builder.Configuration.AddAzureKeyVault(new(vaultUri), new DefaultAzureCredential());
+
+// Get WhatsApp API configuration
 builder.Services.Configure<WhatsAppApiSettings>(builder.Configuration.GetSection("WhatsAppApi"));
 
-// Add services to the container.
+// Add services to the container
 builder.Services.AddHttpClient();
 builder.Services.AddSingleton<IWhatsAppService, WhatsAppService>();
 builder.Services.AddScoped<ApiKeyAuthFilter>();
 
+// Add controllers
 builder.Services.AddControllers();
-// Learn more about configuring Swagger/OpenAPI at https://aka.ms/aspnetcore/swashbuckle
 builder.Services.AddEndpointsApiExplorer();
+
+// Add Swagger with API Key authentication
 builder.Services.AddSwaggerGen(opt =>
 {
     opt.AddSecurityDefinition("ApiKey", new OpenApiSecurityScheme
@@ -28,26 +41,19 @@ builder.Services.AddSwaggerGen(opt =>
     });
     OpenApiSecurityScheme securityScheme = new()
     {
-        Reference = new OpenApiReference
-        {
-            Id = "ApiKey",
-            Type = ReferenceType.SecurityScheme
-        },
+        Reference = new OpenApiReference { Id = "ApiKey", Type = ReferenceType.SecurityScheme },
         In = ParameterLocation.Header
     };
-    OpenApiSecurityRequirement securityRequirements = new()
-    {
-        { securityScheme, Array.Empty<string>() }
-    };
+    OpenApiSecurityRequirement securityRequirements = new() { { securityScheme, Array.Empty<string>() } };
     opt.AddSecurityRequirement(securityRequirements);
 });
 
 var app = builder.Build();
 
-// Configure the HTTP request pipeline.
+app.UseSwagger();
+
 if (app.Environment.IsDevelopment())
 {
-    app.UseSwagger();
     app.UseSwaggerUI();
 }
 
