@@ -1,6 +1,6 @@
 {
   "dependencies": {
-    "secrets2": {
+    "secrets1": {
       "serviceConnectorResourceId": "/subscriptions/[parameters('subscriptionId')]/resourceGroups/[parameters('resourceGroupName')]/providers/Microsoft.Web/sites/DetectorPpeApi20240319191822/providers/Microsoft.ServiceLinker/linkers/VaultUri_53833D8D9F",
       "secretStore": "AzureAppSettings",
       "resourceId": "/subscriptions/[parameters('subscriptionId')]/resourceGroups/[parameters('resourceGroupName')]/providers/Microsoft.KeyVault/vaults/DetectorPpeApiVault",
